@@ -37,7 +37,7 @@ Mar 14 12:40:53 ip-10-0-14-14 kernel: [    0.101515] Booting paravirtualized ker
 The hypervisor is KVM.
 ```
 
-  * How much free space does the disk have?
+    * How much free space does the disk have?
 ```bash
 ~$ df
 Filesystem      1K-blocks    Used Available Use% Mounted on
