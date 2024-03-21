@@ -164,29 +164,45 @@ aws ec2 run-instances --image-id ami-04cd5fb0c47a7ce90 --instance-type t3.micro 
 * add tunnels for ssh and http pointing on the B Instance
 
 ```bash
-//updated string connection
+ssh devopsteam14@15.188.43.46 -i CLD_KEY_DMZ_DEVOPSTEAM14.pem -L 2224:10.0.14.140:22
+ssh devopsteam14@15.188.43.46 -i CLD_KEY_DMZ_DEVOPSTEAM14.pem -L 2223:10.0.14.10:22
 ```
 
 ## Check SQL Accesses
 
 ```sql
-[INPUT]
-//sql string connection from A
+bitnami@ip-10-0-14-10:~$ mariadb -h dbi-devopsteam14.cshki92s4w5p.eu-west-3.rds.amazonaws.com -u bn_drupal -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 239
+Server version: 10.11.7-MariaDB managed by https://aws.amazon.com/rds/
 
-[OUTPUT]
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
 ```
 
 ```sql
-[INPUT]
-//sql string connection from B
+bitnami@ip-10-0-14-140:~$ mariadb -h dbi-devopsteam14.cshki92s4w5p.eu-west-3.rds.amazonaws.com -u bn_drupal -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 252
+Server version: 10.11.7-MariaDB managed by https://aws.amazon.com/rds/
 
-[OUTPUT]
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
 ```
 
 ### Check HTTP Accesses
 
 ```bash
-//connection string updated
+ssh devopsteam14@15.188.43.46 -i CLD_KEY_DMZ_DEVOPSTEAM14.pem -L 2224:10.0.14.140:22 -L 888:10.0.14.140:8080
+ssh devopsteam14@15.188.43.46 -i CLD_KEY_DMZ_DEVOPSTEAM14.pem -L 2223:10.0.14.10:22 -L 887:10.0.14.140:8080
 ```
 
 ### Read and write test through the web app
@@ -197,14 +213,9 @@ aws ec2 run-instances --image-id ami-04cd5fb0c47a7ce90 --instance-type t3.micro 
 
 * Observations ?
 
-```
-//TODO
-```
-
+It changes on both pages
 ### Change the profil picture
 
 * Observations ?
 
-```
-//TODO
-```
+It changes on both pages, but the second can't load the file
