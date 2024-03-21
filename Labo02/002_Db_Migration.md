@@ -108,49 +108,36 @@ Note : only calls from both private subnets must be approved.
 * [Network Mask](https://cric.grenoble.cnrs.fr/Administrateurs/Outils/CalculMasque/)
 
 ```sql
-[INPUT]
 MariaDB [(none)]> CREATE USER bn_drupal@'10.0.14.0/[Subnet Mask - A]]' IDENTIFIED BY '5f336f17ee8ba18d3125f6d984a8fbfa23816fdf50ef8f07a94f6f30ce076f7c';
 Query OK, 0 rows affected (0.004 sec)
 
---Doesn't work ??
-MariaDB [(none)]> SELECT User FROM mysql.user;
-+-------------+
-| User        |
-+-------------+
-| admin       |
-| bn_drupal   |
-| mariadb.sys |
-| rdsadmin    |
-+-------------+
-4 rows in set (0.004 sec)
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON bitnami_drupal.* TO 'bn_drupal'@'10.0.14.0/[Subnet Mask - A]]';
+Query OK, 0 rows affected (0.002 sec)
 
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON bitnami_drupal.* TO 'bn_drupal';
-ERROR 1133 (28000): Can't find any matching row in the user table
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON bitnami_drupal.* TO bn_drupal;
-ERROR 1133 (28000): Can't find any matching row in the user table
-
---DO NOT FOREGT TO FLUSH PRIVILEGES
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
 ```
 
 ```sql
-//validation
-[INPUT]
-SHOW GRANTS for 'bn_drupal'@'10.0.[XX].0/[yourMask]]';
-
-[OUTPUT]
-+----------------------------------------------------------------------------------------------------------------------------------+
-| Grants for <yourNewUser>                                                                                                         |
-+----------------------------------------------------------------------------------------------------------------------------------+
-| GRANT USAGE ON *.* TO <yourNewUser> IDENTIFIED BY PASSWORD 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'                           |
-| GRANT ALL PRIVILEGES ON `bitnami_drupal`.* TO <yourNewUser>                                                                      |
-+----------------------------------------------------------------------------------------------------------------------------------+
+--validation
+MariaDB [(none)]> SHOW GRANTS for 'bn_drupal'@'10.0.14.0/[Subnet Mask - A]]';
++-------------------------------------------------------------------------------------------------------------------------------------+
+| Grants for bn_drupal@10.0.14.0/[subnet mask - a]]
+                  |
++-------------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `bn_drupal`@`10.0.14.0/[subnet mask - a]]` IDENTIFIED BY PASSWORD '*72E2FF7F1F81BE6859E01AFCB2EC5C4E6344091F' |
+| GRANT ALL PRIVILEGES ON `bitnami_drupal`.* TO `bn_drupal`@`10.0.14.0/[subnet mask - a]]`
+                  |
++-------------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.000 sec)
 ```
 
 ### Validate access (on the drupal instance)
 
 ```sql
-[INPUT]
-mysql -h dbi-devopsteam[XX].xxxxxxxx.eu-west-3.rds.amazonaws.com -u bn_drupal -p
+bitnami@ip-10-0-14-10:~$ mariadb -h dbi-devopsteam14.cshki92s4w5p.eu-west-3.rds.amazonaws.com -u bn_drupal -p
+Enter password:
+ERROR 1698 (28000): Access denied for user 'bn_drupal'@'10.0.14.10'
 
 [INPUT]
 show databases;
