@@ -9,36 +9,46 @@ In this task you will migrate the Drupal database to the new RDS database instan
 ### [Get Bitnami MariaDb user's password](https://docs.bitnami.com/aws/faq/get-started/find-credentials/)
 
 ```bash
-[INPUT]
-//help : path /home/bitnami/bitnami_credentials
+bitnami@ip-10-0-14-10:~$ cat /home/bitnami/bitnami_credentials
+Welcome to the Bitnami package for Drupal
 
-[OUTPUT]
+******************************************************************************
+The default username and password is 'user' and '7DWgG95I3W0:'.
+******************************************************************************
+
+You can also use this password to access the databases and any other component the stack includes.
+
+Please refer to https://docs.bitnami.com/ for more details.
 ```
 
 ### Get Database Name of Drupal
 
 ```bash
-[INPUT]
-//add string connection
-
-show databases;
-
-[OUTPUT]
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bitnami_drupal     |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test               |
++--------------------+
 ```
 
-### [Dump Drupal DataBases](https://mariadb.com/kb/en/mariadb-dump/)
+### [Dump Drupal Databases](https://mariadb.com/kb/en/mariadb-dump/)
 
 ```bash
-[INPUT]
-
-[OUTPUT]
+bitnami@ip-10-0-14-10:~$ mariadb-dump bitnami_drupal -h localhost -u root -p > db-dumb.sql
+(file is created)
 ```
 
-### Create the new Data base on RDS
+### Create the new Database on RDS
 
 ```sql
-[INPUT]
-CREATE DATABASE bitnami_drupal;
+MariaDB [(none)]> CREATE DATABASE bitnami_drupal;
+Query OK, 1 row affected (0.000 sec)
 ```
 
 ### [Import dump in RDS db-instance](https://mariadb.com/kb/en/restoring-data-from-dump-files/)
@@ -47,33 +57,47 @@ Note : you can do this from the Drupal Instance. Do not forget to set the "-h" p
 
 ```sql
 [INPUT]
-mysql -h <rds-end-point> -u <rds_admin_user> -p <db_target> < <pathToDumpFileToImport>.sql
-
-[OUTPUT]
+bitnami@ip-10-0-14-10:~$ mysql -h dbi-devopsteam14.cshki92s4w5p.eu-west-3.rds.amazonaws.com -u admin -p bitnami_drupal < db-dumb.sql
+mysql: Deprecated program name. It will be removed in a future release, use '/opt/bitnami/mariadb/bin/mariadb' instead
+Enter password:
 ```
 
 ### [Get the current Drupal connection string parameters](https://www.drupal.org/docs/8/api/database-api/database-configuration)
 
 ```bash
-[INPUT]
-//help : same settings.php as before
-
-[OUTPUT]
-//at the end of the file you will find connection string parameters
-//username = bn_drupal
-//password = XXXXXXX
+bitnami@ip-10-0-14-10:~$ tail -n 13 stack/drupal/sites/default/settings.php
+$databases['default']['default'] = array (
+  'database' => 'bitnami_drupal',
+  'username' => 'bn_drupal',
+  'password' => '5f336f17ee8ba18d3125f6d984a8fbfa23816fdf50ef8f07a94f6f30ce076f7c',
+  'prefix' => '',
+  'host' => '127.0.0.1',
+  'port' => '3306',
+  'isolation_level' => 'READ COMMITTED',
+  'driver' => 'mysql',
+  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
+  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
+);
+$settings['config_sync_directory'] = 'sites/default/files/config_UqAxpBxlX-FIJQQOTAxsI9Q1uv1O69qCVJ7XRR1A9yeXn-EO5D6aIvnezW0lbmD9GHvPSTDwtA/sync';
 ```
 
 ### Replace the current host with the RDS FQDN
 
-```
-//settings.php
-
+```bash
+bitnami@ip-10-0-14-10:~$ tail -n 13 stack/drupal/sites/default/settings.php
 $databases['default']['default'] = array (
-   [...] 
-  'host' => 'dbi-devopsteam99.cshki92s4w5p.eu-west-3.rds.amazonaws.com',
-   [...] 
+  'database' => 'bitnami_drupal',
+  'username' => 'bn_drupal',
+  'password' => '5f336f17ee8ba18d3125f6d984a8fbfa23816fdf50ef8f07a94f6f30ce076f7c',
+  'prefix' => '',
+  'host' => 'dbi-devopsteam14.cshki92s4w5p.eu-west-3.rds.amazonaws.com',
+  'port' => '3306',
+  'isolation_level' => 'READ COMMITTED',
+  'driver' => 'mysql',
+  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
+  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
+$settings['config_sync_directory'] = 'sites/default/files/config_UqAxpBxlX-FIJQQOTAxsI9Q1uv1O69qCVJ7XRR1A9yeXn-EO5D6aIvnezW0lbmD9GHvPSTDwtA/sync';
 ```
 
 ### [Create the Drupal Users on RDS Data base](https://mariadb.com/kb/en/create-user/)
@@ -85,11 +109,27 @@ Note : only calls from both private subnets must be approved.
 
 ```sql
 [INPUT]
-CREATE USER bn_drupal@'10.0.[XX].0/[Subnet Mask - A]]' IDENTIFIED BY '<Drupal password>';
+MariaDB [(none)]> CREATE USER bn_drupal@'10.0.14.0/[Subnet Mask - A]]' IDENTIFIED BY '5f336f17ee8ba18d3125f6d984a8fbfa23816fdf50ef8f07a94f6f30ce076f7c';
+Query OK, 0 rows affected (0.004 sec)
 
-GRANT ALL PRIVILEGES ON bitnami_drupal.* TO '<yourNewUser>';
+--Doesn't work ??
+MariaDB [(none)]> SELECT User FROM mysql.user;
++-------------+
+| User        |
++-------------+
+| admin       |
+| bn_drupal   |
+| mariadb.sys |
+| rdsadmin    |
++-------------+
+4 rows in set (0.004 sec)
 
-//DO NOT FOREGT TO FLUSH PRIVILEGES
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON bitnami_drupal.* TO 'bn_drupal';
+ERROR 1133 (28000): Can't find any matching row in the user table
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON bitnami_drupal.* TO bn_drupal;
+ERROR 1133 (28000): Can't find any matching row in the user table
+
+--DO NOT FOREGT TO FLUSH PRIVILEGES
 ```
 
 ```sql
