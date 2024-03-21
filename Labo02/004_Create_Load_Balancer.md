@@ -17,11 +17,10 @@ instances.
 |Outbound Rules|Refer to the infra schema|
 
 ```bash
-[INPUT]
-
-
-[OUTPUT]
-
+aws ec2 create-security-group --group-name SG-DEVOPSTEAM14-LB --description "Security group for DevOps Team 14 Load Balancer" --vpc-id vpc-03d46c285a2af77ba
+{
+    "GroupId": "sg-0360061815f731650"
+}
 ```
 
 * Create the Target Group
@@ -44,10 +43,35 @@ instances.
 |Success codes|200|
 
 ```bash
-[INPUT]
+aws elbv2 create-target-group --name TG-DEVOPSTEAM14 --protocol HTTP --port 8080 --vpc-id vpc-03d46c285a2af77ba --target-type instance --protocol-version HTTP1 --health-check-protocol HTTP --health-check-path / --health-check-port 8080 --health-check-interval-seconds 10 --health-check-timeout-seconds 5 --healthy-threshold-count 2 --unhealthy-threshold-count 2 --matcher "HttpCode=200"
 
 
-[OUTPUT]
+
+{
+    "TargetGroups": [
+        {
+            "TargetGroupArn": "arn:aws:elasticloadbalancing:eu-west-3:709024702237:targetgroup/TG-DEVOPSTEAM14/51f38f269fe06e8a",
+            "TargetGroupName": "TG-DEVOPSTEAM14",
+            "Protocol": "HTTP",
+            "Port": 8080,
+            "VpcId": "vpc-03d46c285a2af77ba",
+            "HealthCheckProtocol": "HTTP",
+            "HealthCheckPort": "8080",
+            "HealthCheckEnabled": true,
+            "HealthCheckIntervalSeconds": 10,
+            "HealthCheckTimeoutSeconds": 5,
+            "HealthyThresholdCount": 2,
+            "UnhealthyThresholdCount": 2,
+            "HealthCheckPath": "/",
+            "Matcher": {
+                "HttpCode": "200"
+            },
+            "TargetType": "instance",
+            "ProtocolVersion": "HTTP1",
+            "IpAddressType": "ipv4"
+        }
+    ]
+}
 
 ```
 
@@ -73,21 +97,52 @@ Provide the following answers (leave any
 field not mentioned at its default value):
 
 ```bash
-[INPUT]
+aws elbv2 create-load-balancer --name ELB-DEVOPSTEAM14 --type application --scheme internal --ip-address-type ipv4 --subnets subnet-08532e833f35bd94d subnet-03f814992c543a1f8 --security-groups sg-0360061815f731650 --tags Key=Name,Value=ELB-DEVOPSTEAM14
 
 
 [OUTPUT]
-
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:eu-west-3:709024702237:loadbalancer/app/ELB-DEVOPSTEAM14/3bf0a2ed52a20016",
+            "DNSName": "internal-ELB-DEVOPSTEAM14-609778290.eu-west-3.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z3Q77PNBQS71R4",
+            "CreatedTime": "2024-03-21T15:06:11.070000+00:00",
+            "LoadBalancerName": "ELB-DEVOPSTEAM14",
+            "Scheme": "internal",
+            "VpcId": "vpc-03d46c285a2af77ba",
+            "State": {
+                "Code": "provisioning"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "eu-west-3a",
+                    "SubnetId": "subnet-03f814992c543a1f8",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "eu-west-3b",
+                    "SubnetId": "subnet-08532e833f35bd94d",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-0360061815f731650"
+            ],
+            "IpAddressType": "ipv4"
+        }
+    ]
+}
 ```
 
 * Get the ELB FQDN (DNS NAME - A Record)
 
 ```bash
 [INPUT]
-
-
+aws elbv2 describe-load-balancers --names ELB-DEVOPSTEAM14 --query "LoadBalancers[0].DNSName" --output text
 [OUTPUT]
-
+internal-ELB-DEVOPSTEAM14-609778290.eu-west-3.elb.amazonaws.com
 ```
 
 * Get the ELB deployment status
