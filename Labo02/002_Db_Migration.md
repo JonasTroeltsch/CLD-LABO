@@ -108,10 +108,10 @@ Note : only calls from both private subnets must be approved.
 * [Network Mask](https://cric.grenoble.cnrs.fr/Administrateurs/Outils/CalculMasque/)
 
 ```sql
-MariaDB [(none)]> CREATE USER bn_drupal@'10.0.14.0/[Subnet Mask - A]]' IDENTIFIED BY '5f336f17ee8ba18d3125f6d984a8fbfa23816fdf50ef8f07a94f6f30ce076f7c';
-Query OK, 0 rows affected (0.004 sec)
+MariaDB [(none)]>  CREATE USER bn_drupal@'10.0.14.0/255.255.255.240' IDENTIFIED BY '5f336f17ee8ba18d3125f6d984a8fbfa23816fdf50ef8f07a94f6f30ce076f7c';
+Query OK, 0 rows affected (0.003 sec)
 
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON bitnami_drupal.* TO 'bn_drupal'@'10.0.14.0/[Subnet Mask - A]]';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON bitnami_drupal.* TO 'bn_drupal'@'10.0.14.0/255.255.255.240';
 Query OK, 0 rows affected (0.002 sec)
 
 MariaDB [(none)]> FLUSH PRIVILEGES;
@@ -120,15 +120,13 @@ Query OK, 0 rows affected (0.001 sec)
 
 ```sql
 --validation
-MariaDB [(none)]> SHOW GRANTS for 'bn_drupal'@'10.0.14.0/[Subnet Mask - A]]';
-+-------------------------------------------------------------------------------------------------------------------------------------+
-| Grants for bn_drupal@10.0.14.0/[subnet mask - a]]
-                  |
-+-------------------------------------------------------------------------------------------------------------------------------------+
-| GRANT USAGE ON *.* TO `bn_drupal`@`10.0.14.0/[subnet mask - a]]` IDENTIFIED BY PASSWORD '*72E2FF7F1F81BE6859E01AFCB2EC5C4E6344091F' |
-| GRANT ALL PRIVILEGES ON `bitnami_drupal`.* TO `bn_drupal`@`10.0.14.0/[subnet mask - a]]`
-                  |
-+-------------------------------------------------------------------------------------------------------------------------------------+
+MariaDB [(none)]> SHOW GRANTS for 'bn_drupal'@'10.0.14.0/255.255.255.240';
++----------------------------------------------------------------------------------------------------------------------------------+
+| Grants for bn_drupal@10.0.14.0/255.255.255.240                                                                                   |
++----------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `bn_drupal`@`10.0.14.0/255.255.255.240` IDENTIFIED BY PASSWORD '*72E2FF7F1F81BE6859E01AFCB2EC5C4E6344091F' |
+| GRANT ALL PRIVILEGES ON `bitnami_drupal`.* TO `bn_drupal`@`10.0.14.0/255.255.255.240`                                            |
++----------------------------------------------------------------------------------------------------------------------------------+
 2 rows in set (0.000 sec)
 ```
 
@@ -137,19 +135,15 @@ MariaDB [(none)]> SHOW GRANTS for 'bn_drupal'@'10.0.14.0/[Subnet Mask - A]]';
 ```sql
 bitnami@ip-10-0-14-10:~$ mariadb -h dbi-devopsteam14.cshki92s4w5p.eu-west-3.rds.amazonaws.com -u bn_drupal -p
 Enter password:
-ERROR 1698 (28000): Access denied for user 'bn_drupal'@'10.0.14.10'
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 239
+Server version: 10.11.7-MariaDB managed by https://aws.amazon.com/rds/
 
-[INPUT]
-show databases;
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
-[OUTPUT]
-+--------------------+
-| Database           |
-+--------------------+
-| bitnami_drupal     |
-| information_schema |
-+--------------------+
-2 rows in set (0.001 sec)
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
 ```
 
 * Repeat the procedure to enable the instance on subnet 2 to also talk to your RDS instance.
