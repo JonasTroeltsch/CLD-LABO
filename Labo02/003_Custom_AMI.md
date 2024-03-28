@@ -14,9 +14,7 @@ Note : stop the instance before
 |Description|Same as name value|
 
 ```bash
-aws ec2 create-image --name "AMI_DRUPAL_DEVOPSTEAM14_LABO02_RDS" --description "AMI_DRUPAL_DEVOPSTEAM14_LABO02_RDS" \
---tag-specifications 'ResourceType=image,Tags=[{Key=Name,Value=AMI_DRUPAL_DEVOPSTEAM14_LABO02_RDS}]' \
---instance-id 'i-0a71f8b0c14a977f3'
+aws ec2 create-image --name "AMI_DRUPAL_DEVOPSTEAM14_LABO02_RDS" --description "AMI_DRUPAL_DEVOPSTEAM14_LABO02_RDS" --tag-specifications 'ResourceType=image,Tags=[{Key=Name,Value=AMI_DRUPAL_DEVOPSTEAM14_LABO02_RDS}]' --instance-id 'i-0a71f8b0c14a977f3'
 {
     "ImageId": "ami-04cd5fb0c47a7ce90"
 }
