@@ -94,7 +94,11 @@ aws elbv2 create-target-group --name TG-DEVOPSTEAM14 --protocol HTTP --port 8080
 }
 
 ```
+```bash
+aws elbv2 register-targets --target-group-arn arn:aws:elasticloadbalancing:eu-west-3:709024702237:targetgroup/TG-DEVOPSTEAM14/51f38f269fe06e8a --targets Id=i-0a71f8b0c14a977f3 Id=i-0aab65b64442b4464
 
+[no output]
+```
 
 ## Task 02 Deploy the Load Balancer
 
