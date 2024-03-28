@@ -244,40 +244,7 @@ Addresses:  10.0.14.4
 Help : execute `tcpdump port 8080`
 
 ```
-18:22:10.697603 IP 10.0.14.4.64136 > 10.0.14.10.http-alt: Flags [.], ack 5620, win 175, options [nop,nop,TS val 514760572 ecr 4148472617], length 0
-18:22:10.697670 IP 10.0.14.4.64136 > 10.0.14.10.http-alt: Flags [F.], seq 131, ack 5621, win 175, options [nop,nop,TS val 514760572 ecr 4148472617], length 0
-18:22:10.697678 IP 10.0.14.10.http-alt > 10.0.14.4.64136: Flags [.], ack 132, win 489, options [nop,nop,TS val 4148472617 ecr 514760572], length 0
-18:22:14.212775 IP 10.0.14.134.12566 > 10.0.14.10.http-alt: Flags [S], seq 2941112230, win 26883, options [mss 8961,sackOK,TS val 2930995459 ecr 0,nop,wscale 8], length 0
-18:22:14.212799 IP 10.0.14.10.http-alt > 10.0.14.134.12566: Flags [S.], seq 612980698, ack 2941112231, win 62643, options [mss 8961,sackOK,TS val 2146605921 ecr 2930995459,nop,wscale 7], length 0
-18:22:14.213717 IP 10.0.14.134.12566 > 10.0.14.10.http-alt: Flags [.], ack 1, win 106, options [nop,nop,TS val 2930995460 ecr 2146605921], length 0
-18:22:14.213718 IP 10.0.14.134.12566 > 10.0.14.10.http-alt: Flags [P.], seq 1:131, ack 1, win 106, options [nop,nop,TS val 2930995460 ecr 2146605921], length 130: HTTP: GET / HTTP/1.1
-18:22:14.213739 IP 10.0.14.10.http-alt > 10.0.14.134.12566: Flags [.], ack 131, win 489, options [nop,nop,TS val 2146605922 ecr 2930995460], length 0
-18:22:14.222654 IP 10.0.14.10.http-alt > 10.0.14.134.12566: Flags [P.], seq 1:5620, ack 131, win 489, options [nop,nop,TS val 2146605931 ecr 2930995460], length 5619: HTTP: HTTP/1.1 200 OK
-18:22:14.222730 IP 10.0.14.10.http-alt > 10.0.14.134.12566: Flags [F.], seq 5620, ack 131, win 489, options [nop,nop,TS val 2146605931 ecr 2930995460], length 0
-18:22:14.223575 IP 10.0.14.134.12566 > 10.0.14.10.http-alt: Flags [.], ack 5620, win 175, options [nop,nop,TS val 2930995470 ecr 2146605931], length 0
-18:22:14.223625 IP 10.0.14.134.12566 > 10.0.14.10.http-alt: Flags [F.], seq 131, ack 5620, win 175, options [nop,nop,TS val 2930995470 ecr 2146605931], length 0
-18:22:14.223625 IP 10.0.14.134.12566 > 10.0.14.10.http-alt: Flags [.], ack 5621, win 175, options [nop,nop,TS val 2930995470 ecr 2146605931], length 0
-18:22:14.223629 IP 10.0.14.10.http-alt > 10.0.14.134.12566: Flags [.], ack 132, win 489, options [nop,nop,TS val 2146605932 ecr 2930995470], length 0
-18:22:20.689691 IP 10.0.14.4.24254 > 10.0.14.10.http-alt: Flags [S], seq 4103214763, win 26883, options [mss 8961,sackOK,TS val 514770564 ecr 0,nop,wscale 8], length 0
-18:22:20.689715 IP 10.0.14.10.http-alt > 10.0.14.4.24254: Flags [S.], seq 540882200, ack 4103214764, win 62643, options [mss 8961,sackOK,TS val 4148482609 ecr 514770564,nop,wscale 7], length 0
-18:22:20.689821 IP 10.0.14.4.24254 > 10.0.14.10.http-alt: Flags [.], ack 1, win 106, options [nop,nop,TS val 514770564 ecr 4148482609], length 0
 18:22:20.689843 IP 10.0.14.4.24254 > 10.0.14.10.http-alt: Flags [P.], seq 1:131, ack 1, win 106, options [nop,nop,TS val 514770564 ecr 4148482609], length 130: HTTP: GET / HTTP/1.1
-18:22:20.689865 IP 10.0.14.10.http-alt > 10.0.14.4.24254: Flags [.], ack 131, win 489, options [nop,nop,TS val 4148482610 ecr 514770564], length 0
-18:22:20.702624 IP 10.0.14.10.http-alt > 10.0.14.4.24254: Flags [P.], seq 1:5620, ack 131, win 489, options [nop,nop,TS val 4148482622 ecr 514770564], length 5619: HTTP: HTTP/1.1 200 OK
-18:22:20.702762 IP 10.0.14.4.24254 > 10.0.14.10.http-alt: Flags [.], ack 5620, win 175, options [nop,nop,TS val 514770577 ecr 4148482622], length 0
-18:22:20.702790 IP 10.0.14.4.24254 > 10.0.14.10.http-alt: Flags [F.], seq 131, ack 5620, win 175, options [nop,nop,TS val 514770577 ecr 4148482622], length 0
-18:22:20.702807 IP 10.0.14.10.http-alt > 10.0.14.4.24254: Flags [F.], seq 5620, ack 132, win 489, options [nop,nop,TS val 4148482622 ecr 514770577], length 0
-18:22:20.702938 IP 10.0.14.4.24254 > 10.0.14.10.http-alt: Flags [.], ack 5621, win 175, options [nop,nop,TS val 514770577 ecr 4148482622], length 0
-18:22:24.223231 IP 10.0.14.134.59754 > 10.0.14.10.http-alt: Flags [S], seq 1064084069, win 26883, options [mss 8961,sackOK,TS val 2931005470 ecr 0,nop,wscale 8], length 0
-18:22:24.223257 IP 10.0.14.10.http-alt > 10.0.14.134.59754: Flags [S.], seq 2816538535, ack 1064084070, win 62643, options [mss 8961,sackOK,TS val 2146615932 ecr 2931005470,nop,wscale 7], length 0
-18:22:24.224206 IP 10.0.14.134.59754 > 10.0.14.10.http-alt: Flags [.], ack 1, win 106, options [nop,nop,TS val 2931005471 ecr 2146615932], length 0
-18:22:24.224208 IP 10.0.14.134.59754 > 10.0.14.10.http-alt: Flags [P.], seq 1:131, ack 1, win 106, options [nop,nop,TS val 2931005471 ecr 2146615932], length 130: HTTP: GET / HTTP/1.1
-18:22:24.224241 IP 10.0.14.10.http-alt > 10.0.14.134.59754: Flags [.], ack 131, win 489, options [nop,nop,TS val 2146615933 ecr 2931005471], length 0
-18:22:24.233089 IP 10.0.14.10.http-alt > 10.0.14.134.59754: Flags [P.], seq 1:5620, ack 131, win 489, options [nop,nop,TS val 2146615942 ecr 2931005471], length 5619: HTTP: HTTP/1.1 200 OK
-18:22:24.233163 IP 10.0.14.10.http-alt > 10.0.14.134.59754: Flags [F.], seq 5620, ack 131, win 489, options [nop,nop,TS val 2146615942 ecr 2931005471], length 0
-18:22:24.234031 IP 10.0.14.134.59754 > 10.0.14.10.http-alt: Flags [.], ack 5620, win 175, options [nop,nop,TS val 2931005481 ecr 2146615942], length 0
-18:22:24.234078 IP 10.0.14.134.59754 > 10.0.14.10.http-alt: Flags [F.], seq 131, ack 5621, win 175, options [nop,nop,TS val 2931005481 ecr 2146615942], length 0
-18:22:24.234092 IP 10.0.14.10.http-alt > 10.0.14.134.59754: Flags [.], ack 132, win 489, options [nop,nop,TS val 2146615943 ecr 2931005481], length 0
 ```
 
 * In the Apache access log identify the health check accesses from the
