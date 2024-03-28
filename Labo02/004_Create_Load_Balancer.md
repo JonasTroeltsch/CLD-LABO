@@ -263,6 +263,12 @@ Help : execute `tcpdump port 8080`
 * In the Apache access log identify the health check accesses from the
   load balancer and copy some samples into the report.
 
-```
-//TODO
+```.log
+10.0.14.137 - - [28/Mar/2024:15:16:07 +0000] "GET / HTTP/1.1" 500 67
+10.0.14.13 - - [28/Mar/2024:15:16:16 +0000] "GET / HTTP/1.1" 500 67
+10.0.14.137 - - [28/Mar/2024:15:16:17 +0000] "GET / HTTP/1.1" 500 67
+10.0.14.13 - - [28/Mar/2024:15:16:26 +0000] "GET / HTTP/1.1" 500 67
+10.0.14.137 - - [28/Mar/2024:15:16:27 +0000] "GET / HTTP/1.1" 500 67
+10.0.14.13 - - [28/Mar/2024:15:16:36 +0000] "GET / HTTP/1.1" 500 67
+10.0.14.137 - - [28/Mar/2024:15:16:37 +0000] "GET / HTTP/1.1" 500 67
 ```
