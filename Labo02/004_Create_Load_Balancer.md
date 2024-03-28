@@ -23,6 +23,26 @@ aws ec2 create-security-group --group-name SG-DEVOPSTEAM14-LB --description "Sec
 }
 ```
 
+```bash
+aws ec2 authorize-security-group-ingress --protocol tcp --port 8080 --cidr 10.0.0.0/28 --group-id sg-0360061815f731650
+
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-07c63206eb2033a59",
+            "GroupId": "sg-0360061815f731650",
+            "GroupOwnerId": "709024702237",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 8080,
+            "ToPort": 8080,
+            "CidrIpv4": "10.0.0.0/28"
+        }
+    ]
+}
+```
+
 * Create the Target Group
 
 |Key|Value|
