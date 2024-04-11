@@ -111,9 +111,21 @@ aws ec2 create-launch-template `
 
 ```
 [INPUT]
-//cli command
-
+aws autoscaling create-auto-scaling-group `
+    --auto-scaling-group-name ASGRP_DEVOPSTEAM14 `
+    --launch-template "LaunchTemplateName=LT-DEVOPSTEAM14,Version=1" `
+    --vpc-zone-identifier "subnet-03f814992c543a1f8,subnet-08532e833f35bd94d" `
+    --min-size 1 `
+    --max-size 4 `
+    --desired-capacity 1 `
+    --target-group-arns arn:aws:elasticloadbalancing:eu-west-3:709024702237:targetgroup/TG-DEVOPSTEAM14/51f38f269fe06e8a `
+    --health-check-type ELB `
+    --health-check-grace-period 10 `
+    --tags Key=Name,Value=AUTO_EC2_PRIVATE_DRUPAL_DEVOPSTEAM14 `
+    --termination-policies "Default" `
+	--default-instance-warmup 30 
 [OUTPUT]
+no output
 ```
 
 * Result expected
