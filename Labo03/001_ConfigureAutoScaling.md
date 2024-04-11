@@ -32,9 +32,52 @@
 
 ```
 [INPUT]
-//cli command
+aws ec2 create-launch-template `
+    --launch-template-name LT-DEVOPSTEAM14 `
+    --version-description v1.0.0 `
+    --tag-specifications 'ResourceType=launch-template,Tags=[{Key=Name,Value=LT-DEVOPSTEAM14}]' `
+    --launch-template-data '{
+        \"ImageId\": \"ami-04cd5fb0c47a7ce90\",
+        \"InstanceType\": \"t3.micro\",
+        \"NetworkInterfaces\": [
+            {
+                \"AssociatePublicIpAddress\": false,
+                \"DeviceIndex\": 0,
+                \"SubnetId\": \"subnet-03f814992c543a1f8\",
+                \"Groups\": [\"sg-0021f9c1f6d3ada16\"]
+            }
+        ],
+        \"BlockDeviceMappings\": [
+            {
+                \"DeviceName\": \"/dev/xvda\",
+                \"Ebs\": {
+                    \"VolumeSize\": 10,
+                    \"VolumeType\": \"gp3\"
+                }
+            }
+        ],
+        \"Monitoring\": {
+            \"Enabled\": true
+        }
+    }'
 
 [OUTPUT]
+{
+    "LaunchTemplate": {
+        "LaunchTemplateId": "lt-07b8266627fc6f417",
+        "LaunchTemplateName": "LT-DEVOPSTEAM14",
+        "CreateTime": "2024-04-11T13:41:30+00:00",
+        "CreatedBy": "arn:aws:iam::709024702237:user/CLD_DEVOPSTEAM14",
+        "DefaultVersionNumber": 1,
+        "LatestVersionNumber": 1,
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "LT-DEVOPSTEAM14"
+            }
+        ]
+    }
+}
 ```
 
 ## Create an auto scaling group
@@ -68,9 +111,21 @@
 
 ```
 [INPUT]
-//cli command
-
+aws autoscaling create-auto-scaling-group `
+    --auto-scaling-group-name ASGRP_DEVOPSTEAM14 `
+    --launch-template "LaunchTemplateName=LT-DEVOPSTEAM14,Version=1" `
+    --vpc-zone-identifier "subnet-03f814992c543a1f8,subnet-08532e833f35bd94d" `
+    --min-size 1 `
+    --max-size 4 `
+    --desired-capacity 1 `
+    --target-group-arns arn:aws:elasticloadbalancing:eu-west-3:709024702237:targetgroup/TG-DEVOPSTEAM14/51f38f269fe06e8a `
+    --health-check-type ELB `
+    --health-check-grace-period 10 `
+    --tags Key=Name,Value=AUTO_EC2_PRIVATE_DRUPAL_DEVOPSTEAM14 `
+    --termination-policies "Default" `
+	--default-instance-warmup 30 
 [OUTPUT]
+no output
 ```
 
 * Result expected
@@ -81,11 +136,22 @@ Test ssh and web access.
 
 ```
 [INPUT]
-//ssh login
+ssh devopsteam14@15.188.43.46 -i CLD_KEY_DMZ_DEVOPSTEAM14.pem -L 80:internal-ELB-DEVOPSTEAM14-207886138.eu-west-3.elb.amazonaws.com:8080
 
 [OUTPUT]
+Linux ip-10-0-0-5 6.1.0-18-cloud-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.76-1 (2024-02-01) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Apr 11 14:34:45 2024 from 185.144.39.44
+devopsteam14@ip-10-0-0-5:~$
 ```
 
 ```
 //screen shot, web access (login)
 ```
+![drupal](img/webLogin.png)
