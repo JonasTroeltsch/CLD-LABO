@@ -38,40 +38,27 @@ Swp[|                                       1.00M/635M]
 
 * (Scale-IN) Observe the autoscaling effect on your infa
 
+#### cloud watch metric
 
-```
-[INPUT]
-//Screen shot from cloud watch metric
-```
 ![result](img/cpu_metrics.png)
 
-```
-[Sample](./img/CLD_AWS_CLOUDWATCH_CPU_METRICS.PNG)
 
-```
-//TODO screenshot of ec2 instances list (running state)
+####  ec2 instances list (running state)
 ![result](img/EC2_LIST.PNG)
-```
-[Sample](./img/CLD_AWS_EC2_LIST.PNG)
 
+#### Validate that the various instances have been distributed between the two available az.
 ```
-//TODO Validate that the various instances have been distributed between the two available az.
-[INPUT]
-//aws cli command
-
-[OUTPUT]
+see the screenshot of the instances list
 ```
 
-```
-//TODO screenshot of the activity history
-```
-[Sample](./img/CLD_AWS_ASG_ACTIVITY_HISTORY.PNG)
+#### activity history
 
-```
-//TODO screenshot of the cloud watch alarm target tracking
-```
-[Sample](./img/CLD_AWS_CLOUDWATCH_ALARMHIGH_STATS.PNG)
+![result](img/ACTIVITY_HISTORY.PNG)
 
+
+#### screenshot of the cloud watch alarm target tracking
+
+![result](img/ALARMHIGH_TARGET_TRACKING.PNG)
 
 * (Scale-OUT) As soon as all 4 instances have started, end stress on the main machine.
 
