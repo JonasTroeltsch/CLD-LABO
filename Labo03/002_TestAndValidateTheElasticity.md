@@ -64,9 +64,10 @@ see the screenshot of the instances list
 
 [Change the default cooldown period](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html)
 
-```
-//TODO screenshot from cloud watch metric
-```
+
+#### from cloud watch metric
+
+![result](img/cpu_metrics_low.png)
 
 ```
 //TODO screenshot of ec2 instances list (terminated state)
