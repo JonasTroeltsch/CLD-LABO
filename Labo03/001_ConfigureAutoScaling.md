@@ -32,9 +32,52 @@
 
 ```
 [INPUT]
-//cli command
+aws ec2 create-launch-template `
+    --launch-template-name LT-DEVOPSTEAM14 `
+    --version-description v1.0.0 `
+    --tag-specifications 'ResourceType=launch-template,Tags=[{Key=Name,Value=LT-DEVOPSTEAM14}]' `
+    --launch-template-data '{
+        \"ImageId\": \"ami-04cd5fb0c47a7ce90\",
+        \"InstanceType\": \"t3.micro\",
+        \"NetworkInterfaces\": [
+            {
+                \"AssociatePublicIpAddress\": false,
+                \"DeviceIndex\": 0,
+                \"SubnetId\": \"subnet-03f814992c543a1f8\",
+                \"Groups\": [\"sg-0021f9c1f6d3ada16\"]
+            }
+        ],
+        \"BlockDeviceMappings\": [
+            {
+                \"DeviceName\": \"/dev/xvda\",
+                \"Ebs\": {
+                    \"VolumeSize\": 10,
+                    \"VolumeType\": \"gp3\"
+                }
+            }
+        ],
+        \"Monitoring\": {
+            \"Enabled\": true
+        }
+    }'
 
 [OUTPUT]
+{
+    "LaunchTemplate": {
+        "LaunchTemplateId": "lt-07b8266627fc6f417",
+        "LaunchTemplateName": "LT-DEVOPSTEAM14",
+        "CreateTime": "2024-04-11T13:41:30+00:00",
+        "CreatedBy": "arn:aws:iam::709024702237:user/CLD_DEVOPSTEAM14",
+        "DefaultVersionNumber": 1,
+        "LatestVersionNumber": 1,
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "LT-DEVOPSTEAM14"
+            }
+        ]
+    }
+}
 ```
 
 ## Create an auto scaling group
