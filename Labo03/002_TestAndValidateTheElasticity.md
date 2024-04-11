@@ -16,18 +16,24 @@
 htop
 
 [OUTPUT]
-//copy the part representing vCPus, RAM and swap usage
+  0[|                                             0.4%]   Tasks: 33, 409 thr; 1 running                                   
+  1[                                              0.0%]   Load average: 0.01 0.01 0.00                                  
+Mem[|||||||||||||||||||||||||||||||||||||||||264M/951M]   Uptime: 00:32:57                                              
+Swp[|                                       1.00M/635M]
 ```
 
 ### Stress your instance
 
 ```
 [INPUT]
-//stress command
+stress --cpu 2
 
 [OUTPUT]
-//copy the part representing vCPus, RAM and swap usage
-//tip : use two ssh sessions....
+htop
+  0[||||||||||||||||||||||||||||||||||||||||||||100.0%]   Tasks: 36, 409 thr; 2 running
+  1[||||||||||||||||||||||||||||||||||||||||||||100.0%]   Load average: 0.72 0.19 0.06 
+Mem[|||||||||||||||||||||||||||||||||||||||||264M/951M]   Uptime: 00:35:30             
+Swp[|                                       1.00M/635M]                                
 ```
 
 * (Scale-IN) Observe the autoscaling effect on your infa
