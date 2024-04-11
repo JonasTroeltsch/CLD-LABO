@@ -136,11 +136,22 @@ Test ssh and web access.
 
 ```
 [INPUT]
-//ssh login
+ssh devopsteam14@15.188.43.46 -i CLD_KEY_DMZ_DEVOPSTEAM14.pem -L 80:internal-ELB-DEVOPSTEAM14-207886138.eu-west-3.elb.amazonaws.com:8080
 
 [OUTPUT]
+Linux ip-10-0-0-5 6.1.0-18-cloud-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.76-1 (2024-02-01) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Apr 11 14:34:45 2024 from 185.144.39.44
+devopsteam14@ip-10-0-0-5:~$
 ```
 
 ```
 //screen shot, web access (login)
 ```
+![drupal](img/webLogin.png)
