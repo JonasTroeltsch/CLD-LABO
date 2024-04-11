@@ -37,10 +37,14 @@ htop
 [INPUT]
 //Screen shot from cloud watch metric
 ```
+![result](img/cpu_metrics.png)
+
+```
 [Sample](./img/CLD_AWS_CLOUDWATCH_CPU_METRICS.PNG)
 
 ```
 //TODO screenshot of ec2 instances list (running state)
+![result](img/EC2_LIST.PNG)
 ```
 [Sample](./img/CLD_AWS_EC2_LIST.PNG)
 
