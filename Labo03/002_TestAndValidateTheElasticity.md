@@ -69,13 +69,14 @@ see the screenshot of the instances list
 
 ![result](img/cpu_metrics_low.png)
 
-```
-//TODO screenshot of ec2 instances list (terminated state)
-```
 
-```
-//TODO screenshot of the activity history
-```
+#### Ec2 instances list (terminated state)
+
+![result](img/EC2_LIST_TERMINATED.PNG)
+
+#### activity history
+
+![result](img/ACTIVITY_HISTORY_TERMINATED.PNG)
 
 ## Release Cloud resources
 
