@@ -1,4 +1,4 @@
-# Task 002 - Configure Auto Scaling
+# Task 001 - Configure Auto Scaling
 
 ![Schema](./img/CLD_AWS_INFA.PNG)
 
@@ -10,11 +10,11 @@
 
 * Networks (RTE-TABLE/SECURITY GROUP) set as at the end of the Labo2.
 * 1 AMI of your Drupal instance
-* 0 existing ec2 (even is in stopped state)
+* 0 existing ec2 (even is in a stopped state)
 * 1 RDS Database instance - started
 * 1 Elastic Load Balancer - started
 
-## Create a new launch configuration. 
+## Create a new launch template. 
 
 |Key|Value|
 |:--|:--|
@@ -80,7 +80,7 @@ aws ec2 create-launch-template `
 }
 ```
 
-## Create an auto scaling group
+## Create an autoscaling group
 
 * Choose launch template or configuration
 
@@ -109,8 +109,11 @@ aws ec2 create-launch-template `
 ||Notification|None|
 |Add tag to instance|Name|AUTO_EC2_PRIVATE_DRUPAL_DEVOPSTEAM[XX]|
 
+//cli command is optionnal. Important is the screen shot to delivery in next step (testing and validation)
+
 ```
 [INPUT]
+
 aws autoscaling create-auto-scaling-group `
     --auto-scaling-group-name ASGRP_DEVOPSTEAM14 `
     --launch-template "LaunchTemplateName=LT-DEVOPSTEAM14,Version=1" `
@@ -124,6 +127,8 @@ aws autoscaling create-auto-scaling-group `
     --tags Key=Name,Value=AUTO_EC2_PRIVATE_DRUPAL_DEVOPSTEAM14 `
     --termination-policies "Default" `
 	--default-instance-warmup 30 
+
+
 [OUTPUT]
 no output
 ```
