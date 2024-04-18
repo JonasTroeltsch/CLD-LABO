@@ -56,7 +56,7 @@ Create a simple web application as follows.
    `HelloAppEngine` file. What does the code do?
 
    ```
-   //TODO
+   This code is a Java servlet that responds to HTTP GET requests. When a client makes a GET request to the /hello endpoint, the servlet retrieves information about the Java environment and sends a response containing a greeting message along with information about the Java version and the specification version.
    ```
 
 6. Note the annotation starting with `@WebServlet` in front of the
@@ -66,14 +66,14 @@ Create a simple web application as follows.
    `web.xml`. What information does it contain? And what is its use ?
 
    ```
-   //TODO
+   The WEB-INF/web.xml file is a deployment descriptor for a Java web application. The file specifies that the index.jsp file should be served as the default/welcome page for the web application.
    ```
 
 8. Inspect the Google App Engine configuration file
    `appengine-web.xml` in `webapp/WEB-INF`. What information does it contain?
 
    ```
-   //TODO
+   The appengine-web.xml file configures the Java runtime version, indicates that the application is threadsafe, and sets a system property related to logging configuration.
    ```
 
 9. Edit the Google App Engine configuration file as follows:
@@ -85,7 +85,7 @@ Create a simple web application as follows.
     `index.jsp` spotted in `web.xml`. What is its use ?
 
     ```
-    //TODO
+    The file serves as the default page that is displayed when the root URL of the web application is accessed, as configured in the web.xml deployment descriptor. .jsp files are JavaServer Pages, which are used to create dynamic web pages that can contain Java code.
     ```
 
 ---
