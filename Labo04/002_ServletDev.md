@@ -81,10 +81,14 @@ To develop and test the Servlet perform the following steps:
 
 Deliverables:
 
-```
-//TODO - Commit and publish the servlet in your repo, in the 'labo4' directory.
-```
+### Source Code
 
-```
-//TODO - Copy a screenshot of the local and the App Engine console with the Datastore Viewer.
-```
+found in [DatastoreWrite.java](./cld-gae/src/main/java/ch/heigvd/cld/lab/DatastoreWrite.java)
+
+### Screenshots
+
+#### Local Datastore
+![Local screenshot](appendices/LocalDatastore.png)
+
+#### App Engine Console
+![App Engine Console Screenshot](appendices/AppEngineDatastore.png)
