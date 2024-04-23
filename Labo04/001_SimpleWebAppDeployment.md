@@ -155,17 +155,29 @@ Deliverables:
   **appengine-web.xml** and **index.jsp** files in a few sentences.
 
   ```
-  //TODO Java class files
+  Java class files
+
+   The Java class files contain a servlet that responds to HTTP GET requests. When a client makes a GET request to the /hello endpoint, the servlet retrieves information about the Java environment and sends a response containing a greeting message along with information about the Java version.
+   
+   It also contains a static method `getInfo` that retrieves information about the Java version, the OS name and the User name.
   ```
 
   ```
-  //TODO web.xml
+  web.xml
+
+   The web.xml file is a deployment descriptor for a Java web application. The file specifies that the index.jsp file should be served as the default/welcome page for the web application.
   ```
 
   ```
-  //TODO appengine-web.xml
+  appengine-web.xml
+
+   The appengine-web.xml file configures the Java runtime version, indicates that the application is threadsafe, indicates that the application is using the App Engine APIs, and sets a system property related to logging configuration.
   ```
 
   ```
-  //TODO index.jsp
+  index.jsp
+
+   The index.jsp file serves as the default page that is displayed when the root URL of the web application is accessed, as configured in the web.xml deployment descriptor. .jsp files are JavaServer Pages, which are used to create dynamic web pages that can contain Java code.
+
+   In this case, the index.jsp file contains a simple HTML page with a title and a heading that displays a greeting message along with information about environment using the `HelloAppEngine.getInfo()` method and a link to the /hello endpoint.
   ```
