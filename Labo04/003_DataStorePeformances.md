@@ -83,34 +83,30 @@ Error Set:
  
 - What response times do you observe for each Servlet?
 
-  ```
-  TODO
-  ```
+For the normal endpoint they range from 6000ms down to about 100ms. 
+For the datastore endpoint they range from 3500ms to 2500ms
 
 - Compare the response times shown by vegeta with the App Engine
   console. Explain the difference.
 
+The console does not account for the network delay.
+
+![Test 1 -latency](./appendices/test1-latency.png)
 ![Test 2 -latency](./appendices/test2-latency.png)
-  
-  ```
-  TODO (l'image est pour la requete 2)
-  ```
 
 - How many resources have you used to run these tests? From the
   **Quota Details** view of the console determine the non-zero resource
   quotas (**Daily quota** different from 0%). Explain each with a sentence.
   To get a sense of everything that is measured click on **Show resources not in use**.
 
-  ```
-  //TODO (si jamais j'ai plus que ces 2 requetes)
-  ```
+ ![Ressource usage](./appendices/ressource_usage.png)
 
 - Let's suppose you become suspicious that the algorithm for the automatic scaling of
   instances is not working correctly. Imagine a way in which the algorithm could be broken. Which measures shown in the console would you use to detect this failure?
 
-  ```
-  //TODO
-  ```
+There might be too many instances for the workload for a prolonged period, or too few are able to start up when they are needed.
+
+It could be detected by comparing CPU utilisation compared to the number of instances for example
 
 ## Troubleshooting
 
