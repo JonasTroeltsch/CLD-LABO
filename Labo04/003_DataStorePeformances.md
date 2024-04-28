@@ -101,6 +101,14 @@ The console does not account for the network delay.
 
  ![Ressource usage](./appendices/ressource_usage.png)
 
+    * Opérations de lecture dans Cloud Firestore : the number of reads from the database
+    * Appels à l'API Cloud Firestore : the number of calls to the database
+    * Données stockées dans Cloud Firestore : the amount of data stored in the database
+    * Données envoyées à rAPl Cloud Firestore : the amount of data sent to the database
+    * Données reçues de l'API Cloud Firestore : the amount of data received from the database
+    * Opérations de récupération d'entités dans Cloud Firestore : the number of entities retrieved from the database
+    * Sorties réseau Cloud Firestore : the amount of data sent to the network
+
 - Let's suppose you become suspicious that the algorithm for the automatic scaling of
   instances is not working correctly. Imagine a way in which the algorithm could be broken. Which measures shown in the console would you use to detect this failure?
 
