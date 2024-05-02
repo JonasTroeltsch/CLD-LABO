@@ -175,19 +175,20 @@ You should see the application's main page titled __Todos V2__ and you should be
 
 Document any difficulties you faced and how you overcame them. Copy the object descriptions into the lab report.
 
-> // TODO
+```
+The issues we faced were the choice of ports in the frontend and in the port-forwarding command. After some trial and erroe we found the correct combination of ports.
+
+Another issue we face is that the frontend does not store the information in the backend. The was with the `API_ENDPOINT_URL` variable. We had to set it to http://api-svc:8081 to make it work (previous value was http://localhost:8081).
+```
+
 
 ```````
 // TODO object descriptions
 ```````
 
-```yaml
-# api-svc.yaml
-```
+[api-svc.yaml](files/api-svc.yaml)
 
-```yaml
-# frontend-pod.yaml
-```
+[frotend-pod.yaml](files/frontend-pod.yaml)
 
 > [!TIP]
 >
