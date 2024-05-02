@@ -7,7 +7,7 @@ spec:
   - name: frontend
     image: icclabcna/ccp2-k8s-todo-frontend
     ports:
-    - containerPort: 6969
+    - containerPort: 8080
     env:
     - name: API_ENDPOINT_URL
       value: "http://localhost:8081"
