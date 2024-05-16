@@ -51,15 +51,15 @@ You may also use `kubectl get all` repeatedly to see a list of all resources.  Y
     
   * How can you change the number of instances temporarily to 3? Hint: look for scaling in the deployment documentation
 
-    > // TODO
+    > `kubectl scale deployment/frontend-deployment --replicas=1`
     
   * What autoscaling features are available? Which metrics are used?
 
-    > // TODO
+    > proportional scaling is available. cpu percent is used as a metric.
     
   * How can you update a component? (see "Updating a Deployment" in the deployment documentation)
 
-    > // TODO
+    > using the `kubectl set image` command
 
 ## Subtask 3.3 - Put autoscaling in place and load-test it
 
@@ -98,10 +98,31 @@ Document your observations in the lab report. Document any difficulties you face
 > // TODO
 
 
-```````sh
-// TODO autoscaling description
-```````
 
+Autoscaling results:
+
+```sh
+$ kubectl autoscale deployment/frontend-deployment --min=1 --max=4 --cpu-percent=30
+```
+
+
+```sh
+NAME                                   READY   STATUS    RESTARTS      AGE
+api-deployment-664fbdf7d9-vkw7h        1/1     Running   3 (50m ago)   50m
+api-deployment-664fbdf7d9-vrnfg        1/1     Running   3 (50m ago)   50m
+frontend-deployment-859d5f8544-62n8l   1/1     Running   0             54s
+frontend-deployment-859d5f8544-9xgch   1/1     Running   0             79s
+redis-56fb88dd96-dnx7r                 1/1     Running   0             47m
+<-- Vegeta starts Here
+frontend-deployment-859d5f8544-dbmt8   0/1     Pending   0             0s
+frontend-deployment-859d5f8544-dbmt8   0/1     Pending   0             0s
+frontend-deployment-859d5f8544-4ttcq   0/1     Pending   0             0s
+frontend-deployment-859d5f8544-4ttcq   0/1     Pending   0             0s 
+frontend-deployment-859d5f8544-dbmt8   0/1     ContainerCreating   0             0s
+frontend-deployment-859d5f8544-4ttcq   0/1     ContainerCreating   0             0s
+frontend-deployment-859d5f8544-4ttcq   1/1     Running             0             2s
+frontend-deployment-859d5f8544-dbmt8   1/1     Running             0             3s
+```
 [redis-deploy.yaml](files/redis-deploy.yaml)
 
 [api-deploy.yaml](files/api-deploy.yaml)
