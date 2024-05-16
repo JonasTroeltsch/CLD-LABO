@@ -95,16 +95,13 @@ Load-test using Vegeta (500 requests should be enough).
 
 Document your observations in the lab report. Document any difficulties you faced and how you overcame them. Copy the object descriptions into the lab report.
 
-> // TODO
-
-
+> We did not face any difficulties in this task. 
 
 Autoscaling results:
 
 ```sh
 $ kubectl autoscale deployment/frontend-deployment --min=1 --max=4 --cpu-percent=30
 ```
-
 
 ```sh
 NAME                                   READY   STATUS    RESTARTS      AGE
@@ -123,6 +120,10 @@ frontend-deployment-859d5f8544-4ttcq   0/1     ContainerCreating   0            
 frontend-deployment-859d5f8544-4ttcq   1/1     Running             0             2s
 frontend-deployment-859d5f8544-dbmt8   1/1     Running             0             3s
 ```
+google cloud console:
+
+![autoscale](files/ressources_usage.png)
+
 [redis-deploy.yaml](files/redis-deploy.yaml)
 
 [api-deploy.yaml](files/api-deploy.yaml)
