@@ -1,21 +1,27 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis
   labels:
-    component: redis
+    component: redis-deployment
     app: todo
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: redis
-  containers:
-  - name: redis
-    image: redis
-    ports:
-    - containerPort: 6379
-    args:
-    - redis-server 
-    - --requirepass ccp2 
-    - --appendonly yes
+  template:
+    metadata:
+      labels: 
+        component: redis
+        app: todo
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379
+        args:
+        - redis-server 
+        - --requirepass ccp2 
+        - --appendonly yes

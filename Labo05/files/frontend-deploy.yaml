@@ -1,7 +1,7 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-pod
+  name: frontend-deployment
   labels:
     component: frontend
     app: todo
@@ -10,11 +10,17 @@ spec:
   selector:
     matchLabels:
       component: frontend
-  containers:
-  - name: frontend
-    image: icclabcna/ccp2-k8s-todo-frontend
-    ports:
-    - containerPort: 8080
-    env:
-    - name: API_ENDPOINT_URL
-      value: http://api-svc:8081
+  template:
+    metadata:
+      labels: 
+        component: frontend
+        app: todo
+    spec:
+      containers:
+      - name: frontend
+        image: icclabcna/ccp2-k8s-todo-frontend
+        ports:
+        - containerPort: 8080
+        env:
+        - name: API_ENDPOINT_URL
+          value: http://api-svc:8081
