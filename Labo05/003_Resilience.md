@@ -18,7 +18,7 @@ Converting a Pod to be managed by a Deployment is quite simple.
 
   * Use only 1 instance for the Redis-Server. Why?
 
-    > // TODO
+    > Redis is a service that is used to store data. If we have multiple instances of Redis, we would have to synchronize the data between them. This is a complex task and is not necessary for this lab. Therefore, we only have one instance of Redis.
 
   * Delete all application Pods (using `kubectl delete pod ...`) and replace them with deployment versions.
 
