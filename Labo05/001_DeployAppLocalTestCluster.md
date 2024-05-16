@@ -183,7 +183,7 @@ Another issue we face is that the frontend did not store the information in the 
 
 [api-svc.yaml](files/api-svc.yaml)
 
-[frotend-pod.yaml](files/frontend-pod.yaml)
+[frontend-pod.yaml](files/frontend-pod.yaml)
 
 > [!TIP]
 >
